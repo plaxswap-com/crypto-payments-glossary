@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto payments glossary for merchants</title>
+<meta name="description" content="Plain definitions of 35 terms a business meets when it starts taking crypto payments: confirmations, network fees, hosted checkout, webhooks, partial payments, stablecoins, TRC-20, ERC-20, custody and more.">
+<style>
+  :root { --bg:#fbfaf7; --text:#1d1f23; --muted:#5b6170; --line:#e3e0d8; --accent:#1f5f8b; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#15171b; --text:#e8e6e1; --muted:#a3a8b3; --line:#2c3038; --accent:#7fb6dd; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:17px/1.65 Georgia, "Times New Roman", serif; }
+  main { max-width:720px; margin:0 auto; padding:40px 16px 64px; }
+  h1 { font:700 2rem/1.2 system-ui, -apple-system, Segoe UI, sans-serif; margin:0 0 12px; }
+  h2 { font:700 1.15rem/1.3 system-ui, -apple-system, Segoe UI, sans-serif; margin:36px 0 8px; padding-top:16px; border-top:1px solid var(--line); }
+  dt { font:600 1rem/1.4 system-ui, -apple-system, Segoe UI, sans-serif; margin-top:18px; }
+  dd { margin:4px 0 0; }
+  a { color:var(--accent); }
+  .lede { color:var(--muted); font-size:1.05rem; }
+  nav { font:0.95rem/1.6 system-ui, -apple-system, Segoe UI, sans-serif; color:var(--muted); }
+  footer { margin-top:48px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); font-size:0.9rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>Crypto payments glossary for merchants</h1>
+<p class="lede">The words that come up when a shop, freelancer or online service starts taking crypto, explained in plain language. Each entry says what the term means and why it matters when money is on the line.</p>
+<nav>Sections: <a href="#basics">Coins and networks</a> · <a href="#checkout">Checkout</a> · <a href="#outcomes">Payment outcomes</a> · <a href="#integration">Integration</a> · <a href="#money">Fees, custody and payouts</a></nav>
+
+<h2 id="basics">Coins and networks</h2>
+<dl>
+<dt>Blockchain network</dt>
+<dd>The system that records and settles a transaction, such as Bitcoin, Ethereum, Tron or BNB Chain. A payment only counts if it is sent on the network the checkout asked for.</dd>
+<dt>Stablecoin</dt>
+<dd>A token designed to track the value of a currency, usually the US dollar. USDT and USDC are the best known. Merchants like them because the amount received does not swing the way Bitcoin's price does.</dd>
+<dt>USDT</dt>
+<dd>Tether's dollar stablecoin. It exists on several networks at once, so "USDT" alone is not enough information: the customer also has to know which network to use.</dd>
+<dt>TRC-20</dt>
+<dd>The token standard on Tron. USDT on Tron is a TRC-20 token. Transfers are usually fast and the fee is paid in TRX or with Tron's energy and bandwidth resources.</dd>
+<dt>ERC-20</dt>
+<dd>The token standard on Ethereum. USDT and USDC on Ethereum are ERC-20 tokens. The network fee is paid in ETH and can be high when Ethereum is busy, which matters most on small orders.</dd>
+<dt>Native coin</dt>
+<dd>The coin a network uses for its own fees: BTC on Bitcoin, ETH on Ethereum, TRX on Tron, BNB on BNB Chain. A wallet needs some of it to move tokens on that network.</dd>
+<dt>Wallet address</dt>
+<dd>The string a payment is sent to. Addresses look different on each network, and coins sent to the wrong network or a mistyped address are usually lost.</dd>
+<dt>Memo or destination tag</dt>
+<dd>An extra field some networks and exchanges use to tell payments to the same address apart. If a checkout shows one, the customer must include it.</dd>
+</dl>
+
+<h2 id="checkout">Checkout</h2>
+<dl>
+<dt>Crypto payment gateway</dt>
+<dd>A service that lets a business receive crypto. It shows the customer what to send, watches the network for the payment and tells the business when it has settled.</dd>
+<dt>Hosted checkout</dt>
+<dd>A payment page run by the gateway. Your server creates a payment and sends the customer to that page, so you do not have to build address display, QR codes or payment tracking yourself.</dd>
+<dt>Payment link</dt>
+<dd>A single checkout URL for a set price and reference. It works without a website: you can send it in a chat or email, or show it as a QR code. For business clients it can act as a crypto invoice.</dd>
+<dt>Quote</dt>
+<dd>The exact amount the customer must send in the coin and network they picked, worked out from the order price and current rates. Quotes usually hold for a limited time.</dd>
+<dt>Price cushion</dt>
+<dd>A small extra amount added when the customer's coin has to be converted, so that a price move while the coins confirm still covers the order. Any amount left over goes to the merchant.</dd>
+<dt>Payment expiry</dt>
+<dd>The time limit on a payment request. After it, the quote is no longer valid. Gateways differ in what they do with coins that arrive late, so check the rules before you rely on them.</dd>
+</dl>
+
+<h2 id="outcomes">Payment outcomes</h2>
+<dl>
+<dt>Confirmation</dt>
+<dd>Each new block added on top of the block that holds a transaction. More confirmations make a reversal less likely. A Bitcoin block arrives about every ten minutes on average, so Bitcoin payments take longer to settle than payments on faster networks.</dd>
+<dt>Pending payment</dt>
+<dd>A payment request that is waiting for the customer to send coins.</dd>
+<dt>Confirming payment</dt>
+<dd>Coins have arrived but are still being confirmed or checked. Do not ship goods at this stage.</dd>
+<dt>Paid</dt>
+<dd>The customer sent the amount asked and the payment settled. This is the status to wait for before you deliver.</dd>
+<dt>Partial payment (underpayment)</dt>
+<dd>Less than the amount asked arrived. This often happens when a customer sends from an exchange that takes its withdrawal fee out of the amount. Decide in advance whether you ask for the rest, refund, or accept the shortfall.</dd>
+<dt>Overpayment</dt>
+<dd>More than the amount asked arrived. Gateways usually pass the extra on and flag the payment, and the merchant decides whether to refund the difference.</dd>
+<dt>Late payment</dt>
+<dd>Coins that arrive after the payment request expired. Some gateways still credit them and mark them as late, so your system should not treat "expired" as final without checking.</dd>
+<dt>Refund</dt>
+<dd>Sending coins back to the customer. A crypto payment cannot be pulled back the way a card charge can, so refunds are a new transaction and need a correct address from the customer.</dd>
+</dl>
+
+<h2 id="integration">Integration</h2>
+<dl>
+<dt>API key</dt>
+<dd>A secret your server uses to create and read payments. Keep it on the server, never in browser code, and use separate keys for testing and live payments.</dd>
+<dt>Test mode</dt>
+<dd>A way to run the whole payment flow without moving real coins, so you can check how your shop handles each outcome before going live.</dd>
+<dt>Webhook</dt>
+<dd>A message the gateway sends to a URL on your server when a payment changes status. It lets your shop update orders without polling.</dd>
+<dt>Webhook signature</dt>
+<dd>A code sent with each webhook, usually an HMAC made with a shared secret. Your server checks it to prove the message really came from the gateway and was not changed.</dd>
+<dt>Idempotency key</dt>
+<dd>A unique value sent with a request, such as your order number, so that retrying the same request does not create a second payment.</dd>
+<dt>Plugin</dt>
+<dd>Ready-made code that adds a gateway to a platform such as WooCommerce, WHMCS or XenForo, so you can accept crypto without writing an integration.</dd>
+</dl>
+
+<h2 id="money">Fees, custody and payouts</h2>
+<dl>
+<dt>Network fee</dt>
+<dd>The fee paid to the blockchain network to process a transaction, in that network's native coin. It goes to the network, not to the gateway, and it changes with how busy the network is.</dd>
+<dt>Platform fee</dt>
+<dd>The gateway's own charge, usually a percentage of each payment. Check who pays it, the customer or the merchant, because that changes your pricing.</dd>
+<dt>Custody</dt>
+<dd>Who holds the coins. With a custodial gateway, payments go to wallets the gateway runs and you see a balance you can withdraw. With a non-custodial setup, payments go straight to addresses you control and you manage the keys yourself.</dd>
+<dt>Merchant balance</dt>
+<dd>The record of coins a custodial gateway holds for you, usually kept per coin and network. Treat it as money in transit and withdraw on a regular schedule.</dd>
+<dt>Withdrawal</dt>
+<dd>Moving coins from your gateway balance to your own wallet. Expect a gateway fee and a network fee, and check both before you approve.</dd>
+<dt>Recovery phrase</dt>
+<dd>The list of words that can restore a self-custody wallet. Anyone who has it controls the coins, and if it is lost nobody can recover them.</dd>
+<dt>Compliance screening</dt>
+<dd>Checks a gateway runs on payments and wallets, such as sanctions screening. A payment held for review is not final until the check ends, and gateways are not available in every country.</dd>
+</dl>
+
+<h2 id="example">An example: how Plaxswap uses these terms</h2>
+<p>To see the terms in one real setup, take <a href="https://plaxswap.com">Plaxswap</a>, a crypto service whose payment gateway offers payment links, a hosted checkout with a REST API, and plugins for WooCommerce, WHMCS and XenForo. Its API lists the statuses pending, confirming, paid, partially_paid, expired, cancelled and failed, with flags for late and overpaid payments, and it sends signed webhooks. Coins that arrive up to 24 hours after a payment expired are still passed on and marked late.</p>
+<p>On cost, the customer pays a 1.5% platform fee plus the conversion and network costs shown in their quote, with a 0.5% price cushion when their coin is converted. Confirmed payments go to a merchant balance that Plaxswap holds until the merchant withdraws, and each withdrawal costs 0.3% plus the network fee. The setup is described on the <a href="https://plaxswap.com/merchants">Plaxswap merchants page</a>, and the full list of charges is on the <a href="https://plaxswap.com/fees">Plaxswap fees page</a>. Whatever gateway you pick, run a test payment for each outcome before you take real orders.</p>
+
+<footer>Written for merchants learning crypto payments. Last checked November 2026. Fees and rules change, so confirm current details on each provider's own site.</footer>
+</main>
+</body>
+</html>
